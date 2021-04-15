@@ -35,12 +35,16 @@ class Message
     /**
      * Приводит массив сообщений к нужному виду
      * @param $data
+     * @param $onlyUnread
      * @return array
      */
-    public static function formattingMessages($data)
+    public static function formattingMessages($data, $onlyUnread = false)
     {
         $formattedMessages = [];
         foreach ($data as $item) {
+            if ($onlyUnread && $item['is_read']) {
+                continue;
+            }
             $formattedMessages[] =
                 [
                     'id' => $item['message_id'],

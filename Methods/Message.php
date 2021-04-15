@@ -33,26 +33,28 @@ class Message
     /**
      * Получает сообщения диалога
      * @param $dialogsId - id диалога
+     * @param $onlyUnread
      * @return array
      * @throws \Exception
      */
-    public function getDialogMessages($dialogsId)
+    public function getDialogMessages($dialogsId, $onlyUnread = false)
     {
-        $messages = MessageService::formattingMessages($this->action->getMessages($dialogsId));
+        $messages = MessageService::formattingMessages($this->action->getMessages($dialogsId), $onlyUnread);
         return $messages;
     }
 
     /**
      * Получает все сообщения распределенные по диалогам
+     * @param $onlyUnread
      * @return array
      * @throws \Exception
      */
-    public function getAllMessages()
+    public function getAllMessages($onlyUnread = false)
     {
         $messages = [];
         $threads = $this->getDialogs();
         foreach ($threads as $item) {
-            $messages[$item['creator']['name']] = $this->getDialogMessages($item['id']);
+            $messages[$item['creator']['name']] = $this->getDialogMessages($item['id'], $onlyUnread);
         }
         return $messages;
     }
