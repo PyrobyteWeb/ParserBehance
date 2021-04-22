@@ -23,9 +23,10 @@ class Message
             $formattedDialogs[] =
                 [
                     'id' => $item['id'],
-                    'creator' => [
-                        'name' => $item['creator']['display_name'],
-                        'website' => $item['creator']['website'],
+                    'recipient' => [
+                        'name' => $item['recipients'][0]['display_name'],
+                        'login' => $item['recipients'][0]['username'],
+                        'website' => $item['recipients'][0]['website'],
                     ]
                 ];
         }
