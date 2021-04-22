@@ -34,8 +34,8 @@
     * website - вебсайт пользователя
 
 Пример
-     $auth = new \Pyrobyte\Behance\Methods\Auth("ivanbein@outlook.com", "TotKtoKaiden123");
-     $token = $auth->authV1();
-     $messageClass = new \Pyrobyte\Behance\Methods\Message($token);
-     $allMessages = $messageClass->getAllMessages();
+ *    $auth = new \Pyrobyte\Behance\Methods\Auth("ivanbein@outlook.com", "TotKtoKaiden123");
+ *   $token = $auth->authV1();
+ *    $messageClass = new \Pyrobyte\Behance\Methods\Message($token);
+ *    $allMessages = $messageClass->getAllMessages();
      
