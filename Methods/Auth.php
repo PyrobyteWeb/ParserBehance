@@ -29,7 +29,7 @@ class Auth
      * @return string
      * @throws \Exception
      */
-    public function auth($type = self::AUTH_TYPE_ONE, $param = "")
+    public function auth($type, $param)
     {
         if ($type != self::AUTH_TYPE_ONE && $type != self::AUTH_TYPE_TWO) {
             throw new \Exception("Передайте правильный тип авторизации: v1 или v2. Или не передавайте вовсе, поумолчанию v1");
