@@ -35,7 +35,7 @@
 
 Пример
  *    $auth = new \Pyrobyte\Behance\Methods\Auth("login", "password");
- *   $token = $auth->authV1();
+ *   $token = $auth->auth();
  *    $messageClass = new \Pyrobyte\Behance\Methods\Message($token);
  *    $allMessages = $messageClass->getAllMessages();
      
