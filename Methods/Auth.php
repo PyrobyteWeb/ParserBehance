@@ -31,7 +31,7 @@ class Auth
      */
     public function auth($type = self::AUTH_TYPE_ONE, $stateId = null)
     {
-        if ($type != self::AUTH_TYPE_ONE || $type != self::AUTH_TYPE_TWO) {
+        if ($type != self::AUTH_TYPE_ONE && $type != self::AUTH_TYPE_TWO) {
             throw new \Exception("Передайте правильный тип авторизации: v1 или v2. Или не передавайте вовсе, поумолчанию v1");
         }
 
