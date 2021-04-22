@@ -56,7 +56,7 @@ class Message
         foreach ($threads as $item) {
             $messages[$item['id']] = [
                 'name' => $item['recipient']['name'],
-                'login' => $item['recipient']['username'],
+                'login' => $item['recipient']['login'],
                 'message' => $this->getDialogMessages($item['id'], $onlyUnread),
             ];
         }
