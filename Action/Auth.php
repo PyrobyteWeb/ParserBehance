@@ -18,9 +18,11 @@ class Auth extends AbstractAction
 
     /**
      * Первый способ авторизации в биханс (полный). Используя антикапчу
+     * @param $anticaptchaKey
      * @return string
+     * @throws \Exception
      */
-    public function authV1()
+    public function authV1($anticaptchaKey)
     {
         $i = 0;
         do {
@@ -33,7 +35,7 @@ class Auth extends AbstractAction
             sleep(1);
             $this->audit();
             sleep(1);
-            $recaptchaToken = $this->getAnticaptchata();
+            $recaptchaToken = $this->getAnticaptchata($anticaptchaKey);
             sleep(2);
             $resultStepOne = $this->authenticationStepOne($recaptchaToken);
             $i++;
@@ -65,11 +67,11 @@ class Auth extends AbstractAction
      * Метод который, получает токен из антикапчи, в случаи ошибки возрващает false
      * @return bool | string
      */
-    private function getAnticaptchata()
+    private function getAnticaptchata($anticaptchaKey)
     {
         $anticaptcha = new RecaptchaV3Enterprise();
         $anticaptcha->setWebsiteURL("https://auth.services.adobe.com/ru_RU/index.html?callback=https%3A%2F%2Fims-na1.adobelogin.com%2Fims%2Fadobeid%2FBehanceWebSusi1%2FAdobeID%2Ftoken%3Fredirect_uri%3Dhttps%253A%252F%252Fwww.behance.net%252F%253Fisa0%253D1%2523from_ims%253Dtrue%2526old_hash%253D%2526api%253Dauthorize%2526rctx%253D%25257B%252522intent%252522%25253A%252522signIn%252522%25252C%252522csrf%252522%25253A%252522d2f76851-fd41-450f-83b1-850caa4655ea%252522%25252C%252522version%252522%25253A1%25257D%26state%3D%257B%2522ac%2522%253A%2522behance.net%2522%252C%2522csrf%2522%253A%2522d2f76851-fd41-450f-83b1-850caa4655ea%2522%257D%26code_challenge_method%3Dplain%26use_ms_for_expiry%3Dtrue&client_id=BehanceWebSusi1&scope=AdobeID%2Copenid%2Cgnav%2Csao.cce_private%2Ccreative_cloud%2Ccreative_sdk%2Cbe.pro2.external_client%2Cadditional_info.roles&denied_callback=https%3A%2F%2Fims-na1.adobelogin.com%2Fims%2Fdenied%2FBehanceWebSusi1%3Fredirect_uri%3Dhttps%253A%252F%252Fwww.behance.net%252F%253Fisa0%253D1%2523from_ims%253Dtrue%2526old_hash%253D%2526api%253Dauthorize%2526rctx%253D%25257B%252522intent%252522%25253A%252522signIn%252522%25252C%252522csrf%252522%25253A%252522d2f76851-fd41-450f-83b1-850caa4655ea%252522%25252C%252522version%252522%25253A1%25257D%26response_type%3Dtoken%26state%3D%257B%2522ac%2522%253A%2522behance.net%2522%252C%2522csrf%2522%253A%2522d2f76851-fd41-450f-83b1-850caa4655ea%2522%257D&state=%7B%22ac%22%3A%22behance.net%22%2C%22csrf%22%3A%22d2f76851-fd41-450f-83b1-850caa4655ea%22%7D&relay=c51a4b8e-f696-429b-9151-233a153bf9e8&locale=ru_RU&flow_type=token&dctx_id=bhnc_22989526-955d-49e3-9a7d-f093e8f3dbf5&idp_flow_type=login#/");
-        $anticaptcha->setKey("ccab7e105281cfd53bcd5d9ec3a97e22");
+        $anticaptcha->setKey($anticaptchaKey);
         $anticaptcha->setWebsiteKey("6LcGE-4ZAAAAAG2tFdbr7QqpimWAPqhLjI8_O_69");
         $anticaptcha->setPageAction("ob6vwc5vq0n3");
         $anticaptcha->setMinScore(0.7);

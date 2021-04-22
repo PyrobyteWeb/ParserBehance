@@ -25,24 +25,22 @@ class Auth
     /**
      * Метод авторизации в биханс
      * @param string $type
-     * @param null $stateId
+     * @param null $param
      * @return string
      * @throws \Exception
      */
-    public function auth($type = self::AUTH_TYPE_ONE, $stateId = null)
+    public function auth($type = self::AUTH_TYPE_ONE, $param = "")
     {
         if ($type != self::AUTH_TYPE_ONE && $type != self::AUTH_TYPE_TWO) {
             throw new \Exception("Передайте правильный тип авторизации: v1 или v2. Или не передавайте вовсе, поумолчанию v1");
         }
 
         if ($type == self::AUTH_TYPE_ONE) {
-            return $this->action->authV1();
+            return $this->action->authV1($param);
         }
 
-        if ($type == self::AUTH_TYPE_TWO && $stateId) {
-           return $this->action->authV2($stateId);
-        } else {
-            throw new \Exception("При втором способе авторизации параметр stateId является обязательным");
+        if ($type == self::AUTH_TYPE_TWO) {
+           return $this->action->authV2($param);
         }
     }
 
