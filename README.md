@@ -29,13 +29,14 @@
 
 Параметры диалогов 
 * id - идентификатор диалога
-* creator - данные пользователя с кем диалог
+* recipient - данные пользователя с кем диалог
     * name - имя пользователя
+    * login - пользователя
     * website - вебсайт пользователя
 
 Пример
  *    $auth = new \Pyrobyte\Behance\Methods\Auth("login", "password");
- *   $token = $auth->auth();
+ *    $token = $auth->auth();
  *    $messageClass = new \Pyrobyte\Behance\Methods\Message($token);
  *    $allMessages = $messageClass->getAllMessages();
      
